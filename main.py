@@ -1,5 +1,3 @@
-import numpy as np
-import onnxruntime as rt
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -20,14 +18,8 @@ clr.fit(X_train, y_train)
 
 initial_type = [("float_input", FloatTensorType([None, X_train.shape[1]]))]
 onx = convert_sklearn(clr, initial_types=initial_type, target_opset=12, options={type(clr): {"zipmap": False}})
-with open("logreg_iris.onnx", "wb") as f:
+with open("logres_iris/logreg_iris.onnx", "wb") as f:
     f.write(onx.SerializeToString())
-
-sess = rt.InferenceSession("logreg_iris.onnx", providers=["CPUExecutionProvider"])
-input_name = sess.get_inputs()[0].name
-label_name = sess.get_outputs()[0].name
-pred_onx = sess.run([label_name], {input_name: X_test.astype(np.float32)})[0]
-print(pred_onx)
 
 # Load the Breast Cancer dataset
 breast_cancer = load_breast_cancer()
@@ -41,15 +33,9 @@ clf.fit(X_train, y_train)
 # Convert the classifier to ONNX format
 initial_type = [("float_input", FloatTensorType([None, X_train.shape[1]]))]
 onx = convert_sklearn(clf, initial_types=initial_type, target_opset=12, options={type(clf): {"zipmap": False}})
-with open("random_forest_breast_cancer.onnx", "wb") as f:
+with open("breast_cancer_random_forest/random_forest_breast_cancer.onnx", "wb") as f:
     f.write(onx.SerializeToString())
 
-# Load the ONNX model and perform inference
-sess = rt.InferenceSession("random_forest_breast_cancer.onnx", providers=["CPUExecutionProvider"])
-input_name = sess.get_inputs()[0].name
-label_name = sess.get_outputs()[0].name
-pred_onx = sess.run([label_name], {input_name: X_test.astype(np.float32)})[0]
-print(pred_onx)
 
 # Load Wine dataset
 wine = load_wine()
@@ -111,6 +97,6 @@ with torch.no_grad():
 
 # Export the model to ONNX format
 dummy_input = torch.randn(1, 13)  # Example input tensor
-output_path = "wine_pytorch.onnx"
+output_path = "wine_pytorch/wine_pytorch.onnx"
 torch.onnx.export(model, dummy_input, output_path, verbose=True, input_names=["input"], output_names=["output"])
 print(f"Model exported to {output_path}")
