@@ -832,19 +832,19 @@ testing-integration = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "jar
 
 [[package]]
 name = "skl2onnx"
-version = "1.16.0"
+version = "1.17.0"
 description = "Convert scikit-learn models to ONNX"
 optional = false
 python-versions = "*"
 files = [
-    {file = "skl2onnx-1.16.0-py2.py3-none-any.whl", hash = "sha256:7de548580c625bfa5893fe79c9dd3213c3720b12e1ff8e3fd28967da0698242d"},
-    {file = "skl2onnx-1.16.0.tar.gz", hash = "sha256:3370b3d4065ce2dc5933878c3273f4aea41f945cc6514543b13ad2d57f369ce5"},
+    {file = "skl2onnx-1.17.0-py2.py3-none-any.whl", hash = "sha256:27942fc2743efe9dff56380001da4685812d0f5b1b0b9c1a032e80d059d6779a"},
+    {file = "skl2onnx-1.17.0.tar.gz", hash = "sha256:7127dc84e470f489f68094ccfff9a5a815b609f700d43e708e6f658a33b06403"},
 ]
 
 [package.dependencies]
 onnx = ">=1.2.1"
 onnxconverter-common = ">=1.7.0"
-scikit-learn = ">=0.19"
+scikit-learn = ">=1.1"
 
 [[package]]
 name = "sympy"
@@ -962,4 +962,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "55e7b4d8e1a89cdd9a813beaf4d4f5faaea1f6f34081888e3002676662ec636b"
+content-hash = "a0c3ccfd98f1618b807ca3089d78ae542f089958b49f52fcd0bf22048a4f47e1"
